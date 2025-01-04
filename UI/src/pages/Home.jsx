@@ -10,7 +10,8 @@ const Home = () => {
         <>
             <MainBanner />
             <SectionBanner/>
-            <Grid/>
+            <h2 className='font-delius font-semibold ml-24 my-10 text-2xl underline'>Books For You</h2>
+            <Grid home={true}/>
             
         </>
 

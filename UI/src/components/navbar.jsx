@@ -20,7 +20,6 @@ const Navbar = () => {
       setSigner(signer);
       setConnect(true);
       localStorage.setItem('Signer', JSON.stringify(signer.address));
-
     } else {
       alert("Error Occurred!");
     }
@@ -35,18 +34,23 @@ const Navbar = () => {
 
   return (
     <nav className="text-black p-4 flex items-center justify-between font-delius">
-      <Link to={"/"}>
+      {/* Logo */}
+      <Link to={"/"} onClick={() => setSelectedPage('/')}>
         <div className="flex items-center">
           <img src={logo} alt="Logo" width={40} height={40} />
           <div className="text-2xl font-bold">Crypto Pages</div>
         </div>
       </Link>
+
+      {/* Mobile Menu Toggle */}
       <button
         className="lg:hidden text-yellow-500"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         {isMenuOpen ? '✖' : '☰'}
       </button>
+
+      {/* Navigation Links */}
       <ul
         className={`lg:flex space-x-2 inline lg:space-x-6 ${
           isMenuOpen ? 'block' : 'hidden'
@@ -55,10 +59,10 @@ const Navbar = () => {
         {[
           { name: 'Home', href: '/' },
           { name: 'Shop', href: '/shop' },
-          { name: 'Orders', href: '#order' },
           { name: 'Sell Your Book', href: '/selling' },
-          { name: 'About', href: '/about' },
-          { name: 'Contact Us', href: '/contact' },
+          { name: 'My Books', href: '/mybooks' },
+          { name: 'Order From Customer', href: '/orderFromCustomer' },
+          { name: 'My Orders', href: '/myOrders' },
         ].map((item) => (
           <li key={item.href}>
             <Link
@@ -75,6 +79,8 @@ const Navbar = () => {
           </li>
         ))}
       </ul>
+
+      {/* Wallet Connection */}
       <div className="hidden lg:block">
         {connect ? (
           <button
@@ -92,6 +98,8 @@ const Navbar = () => {
           </button>
         )}
       </div>
+
+      {/* Mobile Wallet Connection */}
       {isMenuOpen && (
         <div className="lg:hidden mt-4">
           {connect ? (
@@ -111,6 +119,11 @@ const Navbar = () => {
           )}
         </div>
       )}
+
+      {/* Current Page Display */}
+      {/* <div className="absolute top-4 right-4 text-sm lg:text-base text-gray-700">
+        <span className="font-bold">Current Page:</span> {selectedPage}
+      </div> */}
     </nav>
   );
 };

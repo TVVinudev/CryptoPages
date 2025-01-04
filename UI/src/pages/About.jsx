@@ -1,5 +1,5 @@
 import React from 'react'
-import bg from '../assets/images/prateek-katyal-_YzGQvASeMk-unsplash.jpg'
+import bg from '../assets/images/rb_2249.png'
 
 const About = () => {
   return (
@@ -7,12 +7,14 @@ const About = () => {
 
       <section className='md:h-[80vh] w-full h-auto'>
         <div class=" h-64 w-full bg-cover bg-center pt-10" style={{ backgroundImage: `url(${bg})` }}>
-          <h1 className="text-white font-bold mb-4 text-left ">
-            <span className='font-roboto text-4xl md:text-6xl '>ABOUT US</span>
-          </h1>
+         
         </div>
+        <h1 className="text-black font-bold mb-4 ml-24 text-left mt-5 ">
+            <span className='font-delius text-2xl text-[#604CC3] underline '>ABOUT US</span>
+          </h1>
         <div className='flex justify-center md:mx-40 md:my-10 mx-10 my-4'>
-          <p className='text-justify font-serif text-xl'>
+       
+          <p className='text-justify font-serif text-lg text-gray-500'>
 
             Welcome to our decentralized platform for pre-owned books—a revolutionary way to buy and sell books securely and transparently. Built on the Ethereum blockchain, our dApp connects book enthusiasts from around the world, eliminating intermediaries and empowering users to engage in direct, trustworthy transactions.
 
