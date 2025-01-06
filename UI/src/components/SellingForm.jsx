@@ -71,7 +71,7 @@ const SellingForm = () => {
       toast(`File uploaded successfully! IPFS Hash: ${hash}`);
       return hash;
     } catch (error) {
-      toast.error(`Upload failed: ${error.response?.data?.message || error.message}`);
+      toast.error(`Upload failed: ${error}`);
       throw error;
     } finally {
       setIsLoading(false);

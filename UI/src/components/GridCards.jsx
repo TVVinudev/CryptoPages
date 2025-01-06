@@ -25,7 +25,7 @@ const GridCards = ({ book }) => {
                 <p className="text-gray-600 mt-2">by <span className="text-gray-700 font-medium">{book[2]}</span></p>
                 <div className="mt-4 flex justify-between items-center">
                     <p className="text-gray-600">Available Copies:</p>
-                    <span className="text-gray-800 font-bold">{book[6].toString()}</span>
+                    <span className="text-gray-800 font-bold">{ book[6] == 0 ? 'Out Of Stock' : book[6].toString()}</span>
                 </div>
                 <div className="mt-4 flex justify-between items-center">
                     <p className="text-gray-600">Price:</p>
