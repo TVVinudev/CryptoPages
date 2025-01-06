@@ -2,18 +2,13 @@ import React, { useState, useEffect } from 'react';
 import GridCards from './GridCards';
 import { useNavigate } from 'react-router-dom';
 
-const Grid = ({ home }) => {
+const Grid = ({ home, data }) => {
   const [books, setBooks] = useState([]);
   const Navigate = useNavigate();
+  console.log('from grid',data);
+  
 
-  const Data = [
-    { id: 1, title: "Card 1", description: "This is the description for card 1." },
-    { id: 2, title: "Card 2", description: "This is the description for card 2." },
-    { id: 3, title: "Card 3", description: "This is the description for card 3." },
-    { id: 4, title: "Card 4", description: "This is the description for card 4." },
-    { id: 5, title: "Card 3", description: "This is the description for card 3." },
-    { id: 6, title: "Card 4", description: "This is the description for card 4." },
-  ];
+  const Data = data;
 
   useEffect(() => {
     if (home) {
@@ -34,7 +29,7 @@ const Grid = ({ home }) => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {books.map((book) => (
-              <GridCards /> //key={book.id} book={book}
+              <GridCards book={book} /> 
             ))}
           </div>
         </div>

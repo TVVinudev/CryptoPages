@@ -17,10 +17,12 @@ contract CryptoPages {
         uint256 orderId;
         uint256 bookId;
         address buyer;
+        address seller;
         string houseAddress;
         uint256 mobile;
         uint256 quantity;
         bool delivered;
+        bool payment;
     }
 
     uint256 private bookCounter;
@@ -28,12 +30,6 @@ contract CryptoPages {
 
     mapping(uint256 => Book) public books;
     mapping(uint256 => Order) public orders;
-
-    address public admin;
-
-    constructor(){
-        admin = msg.sender;
-    }
 
     event BookAdded(uint256 bookId, string title, address indexed owner);
     event BookOrdered(uint256 orderId, uint256 bookId, address indexed buyer, uint256 quantity);
@@ -70,12 +66,62 @@ contract CryptoPages {
         book.stock -= _quantity;
 
         orderCounter++;
-        orders[orderCounter] = Order(orderCounter, _bookId, msg.sender, _houseAddress, _mobile, _quantity, false);
-
+    
         payable(book.owner).transfer(msg.value);
+         orders[orderCounter] = Order(orderCounter, _bookId, msg.sender, book.owner , _houseAddress, _mobile, _quantity, false, true);
 
         emit BookOrdered(orderCounter, _bookId, msg.sender, _quantity);
     }
+
+    //search order by seller
+
+     function searchOrdersBySeller(address _seller) public view returns (Order[] memory) {
+        uint256 matchingOrdersCount = 0;
+
+        // Count matching orders
+        for (uint256 i = 1; i <= orderCounter; i++) {
+            if (orders[i].seller == _seller) {
+                matchingOrdersCount++;
+            }
+        }
+
+        // Collect matching orders
+        Order[] memory matchingOrders = new Order[](matchingOrdersCount);
+        uint256 index = 0;
+        for (uint256 i = 1; i <= orderCounter; i++) {
+            if (orders[i].seller == _seller) {
+                matchingOrders[index] = orders[i];
+                index++;
+            }
+        }
+
+        return matchingOrders;
+    }
+
+  // Search orders by buyer
+    function searchOrdersByBuyer(address _buyer) public view returns (Order[] memory) {
+        uint256 matchingOrdersCount = 0;
+
+        // Count matching orders
+        for (uint256 i = 1; i <= orderCounter; i++) {
+            if (orders[i].buyer == _buyer) {
+                matchingOrdersCount++;
+            }
+        }
+
+        // Collect matching orders
+        Order[] memory matchingOrders = new Order[](matchingOrdersCount);
+        uint256 index = 0;
+        for (uint256 i = 1; i <= orderCounter; i++) {
+            if (orders[i].buyer == _buyer) {
+                matchingOrders[index] = orders[i];
+                index++;
+            }
+        }
+
+        return matchingOrders;
+    }
+
 
     // Track an order
     function trackOrder(uint256 _orderId) public view returns (Order memory) {
@@ -103,6 +149,31 @@ contract CryptoPages {
         require(book.id != 0, "Book not found");
         return book;
     }
+
+    // searchh by owner
+     function searchBooksByOwner(address _owner) public view returns (Book[] memory) {
+        uint256 matchingBooksCount = 0;
+
+        // Count matching books
+        for (uint256 i = 1; i <= bookCounter; i++) {
+            if (books[i].owner == _owner) {
+                matchingBooksCount++;
+            }
+        }
+
+        // Collect matching books
+        Book[] memory matchingBooks = new Book[](matchingBooksCount);
+        uint256 index = 0;
+        for (uint256 i = 1; i <= bookCounter; i++) {
+            if (books[i].owner == _owner) {
+                matchingBooks[index] = books[i];
+                index++;
+            }
+        }
+
+        return matchingBooks;
+    }
+
 
     // Search for books by title
     function searchBooksByTitle(string memory _title) public view returns (Book[] memory) {

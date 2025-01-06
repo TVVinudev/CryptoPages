@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from '../assets/images/logo.png';
 import { Link } from 'react-router-dom';
 import { ethers } from 'ethers';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,25 +17,25 @@ const Navbar = () => {
     console.log(signer);
 
     if (signer) {
-      alert(`The address ${signer.address} is connected!`);
+      toast.success(`The address ${signer.address} is connected!`);
       setSigner(signer);
       setConnect(true);
       localStorage.setItem('Signer', JSON.stringify(signer.address));
     } else {
-      alert("Error Occurred!");
+      toast("Error Occurred!");
     }
   };
 
   const disconnectWallet = () => {
     provider = null;
-    console.log("Disconnected from wallet.");
+    toast("Disconnected from wallet.");
     setConnect(false);
     localStorage.setItem('Signer', JSON.stringify(''));
   };
 
   return (
     <nav className="text-black p-4 flex items-center justify-between font-delius">
-      {/* Logo */}
+     
       <Link to={"/"} onClick={() => setSelectedPage('/')}>
         <div className="flex items-center">
           <img src={logo} alt="Logo" width={40} height={40} />
@@ -42,7 +43,7 @@ const Navbar = () => {
         </div>
       </Link>
 
-      {/* Mobile Menu Toggle */}
+      
       <button
         className="lg:hidden text-yellow-500"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -50,29 +51,28 @@ const Navbar = () => {
         {isMenuOpen ? '✖' : '☰'}
       </button>
 
-      {/* Navigation Links */}
+     
       <ul
-        className={`lg:flex space-x-2 inline lg:space-x-6 ${
-          isMenuOpen ? 'block' : 'hidden'
-        } lg:block`}
+        className={`lg:flex space-x-2 inline lg:space-x-6 ${isMenuOpen ? 'block' : 'hidden'
+          } lg:block`}
       >
         {[
-          { name: 'Home', href: '/' },
-          { name: 'Shop', href: '/shop' },
-          { name: 'Sell Your Book', href: '/selling' },
-          { name: 'My Books', href: '/mybooks' },
-          { name: 'Order From Customer', href: '/orderFromCustomer' },
-          { name: 'My Orders', href: '/myOrders' },
+          { name: 'Home', href: '/',element:'<Home />' },
+          { name: 'Shop', href: '/shop',element:'<Shope />'  },
+          { name: 'Sell Your Book', href: '/selling',element:'<Selling />'  },
+          { name: 'My Books', href: '/mybooks',element:'<MyBooks />'  },
+          { name: 'Order From Customer', href: '/orderFromCustomer',element:'<OrderFromCustomer />'  },
+          { name: 'My Orders', href: '/myOrders',element:'<MyOrders />'  },
         ].map((item) => (
           <li key={item.href}>
             <Link
               to={item.href}
+              element = {item.element}
               onClick={() => setSelectedPage(item.href)}
-              className={`block lg:inline font-bold ${
-                selectedPage === item.href
-                  ? 'text-[#604CC3] border-b-2 border-[#604CC3]'
-                  : 'hover:text-[#604CC3]'
-              }`}
+              className={`block lg:inline font-bold ${selectedPage === item.href
+                ? 'text-[#604CC3] border-b-2 border-[#604CC3]'
+                : 'hover:text-[#604CC3]'
+                }`}
             >
               {item.name}
             </Link>
@@ -80,45 +80,12 @@ const Navbar = () => {
         ))}
       </ul>
 
-      {/* Wallet Connection */}
-      <div className="hidden lg:block">
-        {connect ? (
-          <button
-            onClick={disconnectWallet}
-            className="text-white md:px-4 md:py-2 rounded-2xl shadow-2xl bg-[#604CC3]"
-          >
-            MetaMask Connected
-          </button>
-        ) : (
-          <button
-            onClick={onConnect}
-            className="text-black md:px-4 md:py-2 rounded-md shadow-2xl"
-          >
-            Connect MetaMask
-          </button>
-        )}
-      </div>
+     
 
-      {/* Mobile Wallet Connection */}
-      {isMenuOpen && (
-        <div className="lg:hidden mt-4">
-          {connect ? (
-            <button
-              onClick={disconnectWallet}
-              className="text-white md:px-4 md:py-2 rounded-2xl shadow-2xl bg-[#604CC3] w-full"
-            >
-              MetaMask Connected
-            </button>
-          ) : (
-            <button
-              onClick={onConnect}
-              className="text-black md:px-4 md:py-2 rounded-md shadow-2xl w-full"
-            >
-              Connect MetaMask
-            </button>
-          )}
-        </div>
-      )}
+     <ToastContainer
+        position="top-right"
+        pauseOnHover
+      />
 
       {/* Current Page Display */}
       {/* <div className="absolute top-4 right-4 text-sm lg:text-base text-gray-700">
