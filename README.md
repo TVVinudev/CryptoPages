@@ -29,13 +29,13 @@ To run the project locally, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone git@github.com:dinshasivan/Pharma_Track.git
+    git clone https://github.com/TVVinudev/CryptoPages.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd PharmaTrack
+    cd CryptoPages
     ```
-3. Install the dependencies:
+3. open UI file and Install the dependencies:
     ```bash
     npm install
     ```
