@@ -6,6 +6,9 @@ import ABI from '../assets/CryptoPages.json';
 import address from '../assets/deployed_addresses.json';
 import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const SellingForm = () => {
   const navigate = useNavigate()
@@ -61,8 +64,8 @@ const SellingForm = () => {
 
       const response = await axios.post('https://api.pinata.cloud/pinning/pinFileToIPFS', fileData, {
         headers: {
-          pinata_api_key: 'e51b442ab588ab8a58e9',
-          pinata_secret_api_key: '9a802774ecbaa67a331c7d96774063329073fddce6e0fc03f1d7376dcb47dee8',
+          pinata_api_key: process.env.PRIVATE_KEY,
+          pinata_secret_api_key:process.env.PRIVATE_KEY,
           'Content-Type': 'multipart/form-data',
         },
       });
