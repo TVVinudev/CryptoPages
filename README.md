@@ -60,7 +60,7 @@ To interact with the blockchain and deploy the smart contract, follow these step
 
 2. Set up your environment variables by creating a `.env` file in the root of the project with the following content:
     ```bash
-    SEPOLIA_URL=your_sepolia_rpc_url
+    API_KEY=your_sepolia_rpc_url
     PRIVATE_KEY=your_private_key
     ```
     
