@@ -82,10 +82,6 @@ To interact with the blockchain and deploy the smart contract, follow these step
           url: process.env.SEPOLIA_URL,
           accounts: [process.env.PRIVATE_KEY],
         },
-        holesky: {
-          url: process.env.HOLSKEY_URL,
-          accounts: [process.env.PRIVATE_KEY],
-        },
       },
     };
     ```
@@ -93,7 +89,7 @@ To interact with the blockchain and deploy the smart contract, follow these step
 ---
 
 ### Notes
-- Replace `YOUR_ALCHEMY_API_KEY` with your actual Alchemy API key for the Holesky network.
+- Replace `YOUR_ALCHEMY_API_KEY` with your actual Alchemy API key for the Sepolia network.
 - Ensure the `.env` file is added to your `.gitignore` to avoid exposing sensitive information like private keys.
 
 ---
