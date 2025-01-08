@@ -38,9 +38,14 @@ const OrderFromCustomer = () => {
             <div className="flex items-center justify-center my-15">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {orders.map((order) => (
-                            <OrderDetailsCard key={order[0]} order={order} />
-                        ))}
+                        {orders.length > 0 ? (
+                            orders.map((order) => (
+                                <OrderDetailsCard key={order[0]} order={order} />
+                            ))
+                        ) : (
+                            <p className="text-center mt-10">No Order found.</p>
+                        )}
+
                     </div>
                 </div>
             </div>

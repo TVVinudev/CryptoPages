@@ -11,6 +11,7 @@ const SellingForm = () => {
   const navigate = useNavigate()
   const [fileHash, setFileHash] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  // const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -71,8 +72,7 @@ const SellingForm = () => {
       toast(`File uploaded successfully! IPFS Hash: ${hash}`);
       return hash;
     } catch (error) {
-      toast.error(`Upload failed: ${error}`);
-      throw error;
+      toast.error(`Upload failed..!`);
     } finally {
       setIsLoading(false);
     }
@@ -103,6 +103,7 @@ const SellingForm = () => {
 
       toast.success(`Transaction submitted! Hash: ${transaction.hash}`);
 
+
       formData.title = ''
       formData.author = ''
       formData.description = ''
@@ -117,6 +118,10 @@ const SellingForm = () => {
       throw error;
     }
   };
+
+
+  
+
 
   return (
     <div className="p-10 shadow-2xl w-[50vh] h-auto text-[#604CC3] bg-white">

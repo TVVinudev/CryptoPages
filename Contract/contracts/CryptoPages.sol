@@ -35,7 +35,7 @@ contract CryptoPages {
     event BookOrdered(uint256 orderId, uint256 bookId, address indexed buyer, uint256 quantity);
     event OrderDelivered(uint256 orderId);
 
-    // Add a new book
+    
     function addBook(string memory _title, string memory _author,string memory _description, string memory _img, uint256 _price, uint256 _stock ) public {
         require(_price > 0, "Price must be greater than zero");
         require(_stock > 0, "Stock must be greater than zero");
@@ -46,7 +46,7 @@ contract CryptoPages {
         emit BookAdded(bookCounter, _title, msg.sender);
     }
 
-    // View all books
+    
     function viewBooks() public view returns (Book[] memory) {
         Book[] memory allBooks = new Book[](bookCounter);
         for (uint256 i = 1; i <= bookCounter; i++) {
@@ -55,7 +55,7 @@ contract CryptoPages {
         return allBooks;
     }
 
-    // Order a book
+    
     function orderBook(uint256 _bookId, uint256 _quantity, string memory _houseAddress, uint256 _mobile) public payable {
         Book storage book = books[_bookId];
         require(book.id != 0, "Book does not exist");
@@ -73,19 +73,19 @@ contract CryptoPages {
         emit BookOrdered(orderCounter, _bookId, msg.sender, _quantity);
     }
 
-    //search order by seller
+
 
      function searchOrdersBySeller(address _seller) public view returns (Order[] memory) {
         uint256 matchingOrdersCount = 0;
 
-        // Count matching orders
+        
         for (uint256 i = 1; i <= orderCounter; i++) {
             if (orders[i].seller == _seller) {
                 matchingOrdersCount++;
             }
         }
 
-        // Collect matching orders
+        
         Order[] memory matchingOrders = new Order[](matchingOrdersCount);
         uint256 index = 0;
         for (uint256 i = 1; i <= orderCounter; i++) {
@@ -98,18 +98,18 @@ contract CryptoPages {
         return matchingOrders;
     }
 
-  // Search orders by buyer
+  
     function searchOrdersByBuyer(address _buyer) public view returns (Order[] memory) {
         uint256 matchingOrdersCount = 0;
 
-        // Count matching orders
+        
         for (uint256 i = 1; i <= orderCounter; i++) {
             if (orders[i].buyer == _buyer) {
                 matchingOrdersCount++;
             }
         }
 
-        // Collect matching orders
+    
         Order[] memory matchingOrders = new Order[](matchingOrdersCount);
         uint256 index = 0;
         for (uint256 i = 1; i <= orderCounter; i++) {
@@ -123,14 +123,14 @@ contract CryptoPages {
     }
 
 
-    // Track an order
+    
     function trackOrder(uint256 _orderId) public view returns (Order memory) {
         Order memory order = orders[_orderId];
         require(order.orderId != 0, "Order does not exist");
         return order;
     }
 
-    // Mark an order as delivered (only seller can call this)
+
     function deliverOrder(uint256 _orderId) public {
         Order storage order = orders[_orderId];
         require(order.orderId != 0, "Order does not exist");
@@ -143,25 +143,25 @@ contract CryptoPages {
         emit OrderDelivered(_orderId);
     }
 
-    // Search for a book by ID
+    
     function searchBookById(uint256 _bookId) public view returns (Book memory) {
         Book memory book = books[_bookId];
         require(book.id != 0, "Book not found");
         return book;
     }
 
-    // searchh by owner
+    
      function searchBooksByOwner(address _owner) public view returns (Book[] memory) {
         uint256 matchingBooksCount = 0;
 
-        // Count matching books
+        
         for (uint256 i = 1; i <= bookCounter; i++) {
             if (books[i].owner == _owner) {
                 matchingBooksCount++;
             }
         }
 
-        // Collect matching books
+        
         Book[] memory matchingBooks = new Book[](matchingBooksCount);
         uint256 index = 0;
         for (uint256 i = 1; i <= bookCounter; i++) {
@@ -175,18 +175,18 @@ contract CryptoPages {
     }
 
 
-    // Search for books by title
+    
     function searchBooksByTitle(string memory _title) public view returns (Book[] memory) {
         uint256 matchingBooksCount = 0;
 
-        // Count matching books
+        
         for (uint256 i = 1; i <= bookCounter; i++) {
             if (keccak256(abi.encodePacked(books[i].title)) == keccak256(abi.encodePacked(_title))) {
                 matchingBooksCount++;
             }
         }
 
-        // Collect matching books
+        
         Book[] memory matchingBooks = new Book[](matchingBooksCount);
         uint256 index = 0;
         for (uint256 i = 1; i <= bookCounter; i++) {
@@ -198,18 +198,18 @@ contract CryptoPages {
         return matchingBooks;
     }
 
-    // Search for books by author
+    
     function searchBooksByAuthor(string memory _author) public view returns (Book[] memory) {
         uint256 matchingBooksCount = 0;
 
-        // Count matching books
+        
         for (uint256 i = 1; i <= bookCounter; i++) {
             if (keccak256(abi.encodePacked(books[i].author)) == keccak256(abi.encodePacked(_author))) {
                 matchingBooksCount++;
             }
         }
 
-        // Collect matching books
+        
         Book[] memory matchingBooks = new Book[](matchingBooksCount);
         uint256 index = 0;
         for (uint256 i = 1; i <= bookCounter; i++) {
