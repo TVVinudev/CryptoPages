@@ -39,8 +39,10 @@ To run the project locally, follow these steps:
     ```bash
     npm install
     ```
-4. Start the project:
-    ```bash
+4. To obtain the private key and secret key for IPFS, create an account in PINATA. Include the PRIVATE_KEY and SECRET_KEY veriables obtained from the PINATA in a.env file that you add to the project.
+
+5. Run the file
+   ```bash
     npm run dev
     ```
     
@@ -52,7 +54,7 @@ To interact with the blockchain and deploy the smart contract, follow these step
 
 1. Install Hardhat and the required dependencies:
     ```bash
-    cd CertifyChain
+    cd Contract
     npm install -D hardhat @nomicfoundation/hardhat-toolbox
     ```
 
